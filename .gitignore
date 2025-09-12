@@ -3,6 +3,7 @@ target/
 #.mvn/wrapper/maven-wrapper.jar
 mvnw
 mvnw.cmd
+#
 !**/src/main/**/target/
 !**/src/test/**/target/
 
