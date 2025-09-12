@@ -1,0 +1,30 @@
+package com.springboot.app.controllers;
+
+import com.springboot.app.models.User;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+
+
+@Controller
+public class UserController {
+
+        @GetMapping("details")
+        public String details(Model model) {
+            User user = new User("Felipe", "Silva");
+            model.addAttribute("title", "Hola Mundo Spring Boot con Thymeleaf");
+            model.addAttribute("user", user);
+
+        return "details";
+        }
+
+//        @GetMapping("details")
+//        public String details(Map<String, Object> model) {
+//                model.put("title", "Hola Mundo Spring Boot con Thymeleaf");
+//                model.put("name", "Felipe");
+//                model.put("lastname", "Silva");
+//            return "details";
+//        }
+
+}
