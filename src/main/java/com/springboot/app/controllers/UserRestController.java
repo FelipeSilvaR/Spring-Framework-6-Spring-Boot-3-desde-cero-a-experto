@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -33,6 +32,21 @@ public class UserRestController {
         userDto.setUser(user);
 
         return userDto;
+    }
+
+    @GetMapping(path = "/list")
+    public List<User> listUsers() {
+        User user1 = new User("Jhon", "Connor");
+        User user2 = new User("Jhon", "Rambo");
+        User user3 = new User("Felipe", "Silva");
+
+        List<User> users = Arrays.asList(user1, user2, user3);
+//        List<User> users = new ArrayList<>();
+//        users.add(user1);
+//        users.add(user2);
+//        users.add(user3);
+
+        return users;
     }
 
 }
