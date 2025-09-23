@@ -2,7 +2,9 @@ package com.springboot.app.controllers;
 
 import com.springboot.app.models.User;
 import com.springboot.app.models.dto.ParamDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.Map;
 public class PathVariableController {
 
     @Value("${config.code}")
-    private String code;
+    private Integer code;
 
     @Value("${config.username}")
     private String username;
@@ -29,6 +31,18 @@ public class PathVariableController {
 
     @Value("#{'${config.listOfValues}'.toUpperCase()}")
     private String valueString;
+
+    @Value("#{${config.valuesMap}}")
+    private Map<String, Object> valuesMap;
+
+    @Value("#{${config.valuesMap}.product}")
+    private String product;
+
+    @Value("#{${config.valuesMap}.price}")
+    private Long price;
+
+    @Autowired
+    private Environment enviroment;
 
 
     @GetMapping("/baz/{message}")
@@ -66,6 +80,11 @@ public class PathVariableController {
         json.put("listOfValues", listOfValues);
         json.put("valueList", valueList);
         json.put("valueString", valueString);
+        json.put("valuesMap", valuesMap);
+        json.put("product", product);
+        json.put("price", price);
+        json.put("message2", enviroment.getProperty("config.message"));
+        json.put("code2", enviroment.getProperty("config.code", Integer.class));
 
         return json;
     }
